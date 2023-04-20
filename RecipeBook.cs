@@ -1,4 +1,19 @@
-﻿class RecipeBook
+﻿
+class Recipe
+{ 
+
+
+    public Recipe()
+    {
+    
+    
+    }
+
+ }
+
+
+
+class RecipeBook
 {
 
 
@@ -93,7 +108,7 @@
         double[] ingrQuantity = new double[numOfIngredients];
         String[] ingrUntsOfMeasuremnt = new string[numOfIngredients];
 
-        for (int i = 0; 1 < numOfIngredients; i++)
+        for (int i = 0; 1 < ingrNames.Length; i++)
         {
 
             Console.WriteLine("Please enter ingredient name:");
@@ -116,7 +131,7 @@
         
         int stepProg = 1;
 
-        for (int b = 0; b < numOfSteps; b++)
+        for (int b = 0; b < steps.Length; b++)
         {
 
 
