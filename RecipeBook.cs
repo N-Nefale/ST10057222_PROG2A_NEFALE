@@ -13,6 +13,42 @@
             * 
             */
 
+        string input = null;
+        do
+        {
+
+            Console.WriteLine("Menu:\r\n         1* New recipe\r\n         2* View recipe\r\n         3* Clear Data\\r\\n         3* Exit");
+            input = Console.ReadLine();
+
+            if (input.Equals("1"))
+            {
+
+                //newRecipe();
+
+            }
+            else
+            if (input.Equals("2"))
+            {
+
+                //viewRecipe();
+
+            }
+            else
+            if (input.Equals("3"))
+            {
+
+                //clearData();
+
+            }
+            else
+            {
+
+                Console.WriteLine("\nINCORRECT SELECTION!!!!!\n");
+            
+            }
+
+        } while (input != "4");
+
         /*Collect any information related to the recipe
         * New recipe:
         *          1.recipe name

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "ST10057222_PROG2A_NEFALE/1.0.0": {
+        "runtime": {
+          "ST10057222_PROG2A_NEFALE.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ST10057222_PROG2A_NEFALE/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
