@@ -49,18 +49,6 @@
 
         } while (input != "4");
 
-        /*Collect any information related to the recipe
-        * New recipe:
-        *          1.recipe name
-        *          2.number of ingredients
-        *          3.ingredients name
-        *          4.quantity
-        *          5.unit of measurement
-        *          6.number of  steps
-        *          7.input steps
-        * 
-        */
-
 
         /*Dispplay the recipe in full 
          * View recipe:
@@ -78,6 +66,72 @@
     }
 
 
+    public static void newRecipe()
+    {
+
+        /*Collect any information related to the recipe
+         * New recipe:
+         *          1.recipe name
+         *          2.number of ingredients
+         *          3.ingredients name
+         *          4.quantity
+         *          5.unit of measurement
+         *          6.number of  steps
+         *          7.input steps
+         * 
+         */
+
+        Console.WriteLine("New recipe:\r\n Please enter the name of the recipe:");
+        string rName = Console.ReadLine();
+        Console.WriteLine("");
+
+
+        Console.WriteLine("\r         How many ingredients are needed for this recipe:");
+        int numOfIngredients = int.Parse(Console.ReadLine());
+
+        String[] ingrNames = new string[numOfIngredients];
+        double[] ingrQuantity = new double[numOfIngredients];
+        String[] ingrUntsOfMeasuremnt = new string[numOfIngredients];
+
+        for (int i = 0; 1 < numOfIngredients; i++)
+        {
+
+            Console.WriteLine("Please enter ingredient name:");
+            ingrNames[i] = Console.ReadLine();
+
+            Console.WriteLine("Please enter how much ingredient of this ingerdient is needed:");
+            ingrQuantity[i] = double.Parse(Console.ReadLine());
+
+
+            Console.WriteLine("Please select a unit of measurement for this ingredient:\r\n 1.Milligrams(mg)\r\n 2.Grams(g)\r\n 3.");
+            //ingrUntsOfMeasuremnt[i]
+
+        }
+
+
+
+        Console.WriteLine("Please enter the number of step in this recipe");
+        int numOfSteps = int.Parse(Console.ReadLine());
+        string[] steps = new string[numOfSteps];
+        
+        int stepProg = 1;
+
+        for (int b = 0; b < numOfSteps; b++)
+        {
+
+
+            Console.WriteLine("Please enter step " + stepProg + " of the recipe: ");
+            steps[b] = Console.ReadLine();
+
+            b++;
+            stepProg++;
+
+        }
+
+
+        Console.ReadKey();
+
+    }
 
 
 
