@@ -38,7 +38,7 @@ class RecipeBook
             if (input.Equals("1"))
             {
 
-                //newRecipe();
+                newRecipe();
 
             }
             else
@@ -108,14 +108,14 @@ class RecipeBook
         double[] ingrQuantity = new double[numOfIngredients];
         String[] ingrUntsOfMeasuremnt = new string[numOfIngredients];
 
-        for (int i = 0; 1 < ingrNames.Length; i++)
+        for (int a = 0; a < ingrNames.Length; a++)
         {
 
             Console.WriteLine("Please enter ingredient name:");
-            ingrNames[i] = Console.ReadLine();
+            ingrNames[a] = Console.ReadLine();
 
             Console.WriteLine("Please enter how much ingredient of this ingerdient is needed:");
-            ingrQuantity[i] = double.Parse(Console.ReadLine());
+            ingrQuantity[a] = double.Parse(Console.ReadLine());
 
 
             Console.WriteLine("Please select a unit of measurement for this ingredient:\r\n 1.Milligrams(mg)\r\n 2.Grams(g)\r\n 3.");
