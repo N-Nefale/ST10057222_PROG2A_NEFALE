@@ -354,6 +354,176 @@ namespace ST10057222_PROG2A_NEFALE
         }
 
 
+        public static string scale(string[] storage)
+        {
+
+            // Parse the quantity as a double from the first string in the input array
+            double quant = double.Parse(storage[0]);
+            // Store the unit of measurement as a string
+            string units = storage[1];
+
+            // Cast the quantity as an integer to get whole units
+            int quantityTemp = (int)quant;
+            // Use a switch statement to check which unit of measurement was input
+            switch (units)
+            {
+                case "teaspoon":
+                    // If the input was in teaspoons and the quantity is at least 3 teaspoons, convert to tablespoons
+                    if (quantityTemp >= 3)
+                    {
+                        // Calculate how many tablespoons are in the quantity and how many teaspoons remain
+                        int temp1 = quantityTemp / 3;
+                        int temp2 = quantityTemp % 3;
+                        quantityTemp = temp1;
+                        units = "tablespoon";
+                        // If there are at least 16 tablespoons, convert to cups
+                        if (quantityTemp >= 16)
+                        {
+                            // Calculate how many cups are in the quantity and how many tablespoons remain
+                            temp1 = quantityTemp / 16;
+                            temp2 = quantityTemp % 16;
+                            quantityTemp = temp1;
+                            units = "cup";
+                            // If there are at least 4 cups, convert to quarts
+                            if (quantityTemp >= 4)
+                            {
+                                // Calculate how many quarts are in the quantity and how many cups remain
+                                temp1 = quantityTemp / 4;
+                                temp2 = quantityTemp % 4;
+                                quantityTemp = temp1;
+                                units = "quart";
+                                // If there are any cups remaining, return the quantity in quarts and cups
+                                if (temp2 > 0)
+                                {
+                                    return quantityTemp + " " + units + "\r and " + temp2 + " cup";
+                                }
+                                // Otherwise, return the quantity in quarts only
+                                else
+                                {
+                                    return quantityTemp + " " + units;
+                                }
+                            }
+                            // If there are any tablespoons remaining, return the quantity in cups and tablespoons
+                            else
+                            {
+                                if (temp2 > 0)
+                                {
+                                    return quantityTemp + " " + units + " and " + temp2 + " tablespoon";
+                                }
+                                // Otherwise, return the quantity in cups only
+                                else
+                                {
+                                    return quantityTemp + " " + units;
+                                }
+                            }
+                        }
+                        // If there are any teaspoons remaining, return the quantity in tablespoons and teaspoons
+                        else
+                        {
+                            if (temp2 > 0)
+                            {
+                                return quantityTemp + " " + units + " and " + temp2 + " teaspoon";
+                            }
+                            // Otherwise, return the quantity in tablespoons only
+                            else
+                            {
+                                return quantityTemp + " " + units;
+                            }
+                        }
+                    }
+
+                    break;
+                case "tablespoon":
+                    // If the input was in tablespoons and the quantity is at least 16 teaspoons, convert to cups
+                    if (quantityTemp >= 16)
+                    {
+
+                        // Calculate how many cups are in the quantity and how many tablespoons remain
+                        int temp1 = quantityTemp / 16;
+                        int temp2 = quantityTemp % 16;
+                        quantityTemp = temp1;
+                        units = "cup";
+                        // If there are at least 4 cups, convert to quarts
+                        if (quantityTemp >= 4)
+                        {
+                            // Calculate how many quarts are in the quantity and how many cups remain
+                            temp1 = quantityTemp / 4;
+                            temp2 = quantityTemp % 4;
+                            quantityTemp = temp1;
+                            units = "quart";
+                            if (temp2 > 0)
+                            {
+                                // If there are any cups remaining, return the quantity in quarts and cups
+                                return quantityTemp + " " + units + " and " + temp2 + " cup";
+
+                            }
+                            else
+                            {
+                                // Otherwise, return the quantity in quarts only
+                                return quantityTemp + " " + units;
+
+                            }
+
+                        }
+                        // If there are any tablespoons remaining, return the quantity in tablespoons and cups
+                        else
+                        {
+
+                            if (temp2 > 0)
+                            {
+
+                                return quantityTemp + " " + units + " and " + temp2 + " tablespoon";
+
+                            }
+                            // Otherwise, return the quantity in tablespoons only
+                            else
+                            {
+
+                                return quantityTemp + " " + units;
+
+                            }
+
+                        }
+
+                    }
+
+                    break;
+
+                case "cup":
+                    // If the input was in cups and the quantity is at least 4 tablespoons, convert to cups
+                    if (quantityTemp >= 4)
+                    {
+                        // Calculate how many quarts are in the quantity and how many cups remain
+                        int temp1 = quantityTemp / 4;
+                        int temp2 = quantityTemp % 4;
+                        quantityTemp = temp1;
+                        units = "quart";
+                        // If there are at least 4 cups, convert to quarts
+                        if (temp2 > 0)
+                        {
+
+                            return quantityTemp + " " + units + " and " + temp2 + " cup";
+
+                        }
+                        else
+                        {
+                            // Otherwise, return the quantity in quarts only
+                            return quantityTemp + " " + units;
+
+                        }
+
+                    }
+
+                    break;
+
+            }
+
+            return quant + " " + units;
+
+        }
+
     }
+
+
 
 }
