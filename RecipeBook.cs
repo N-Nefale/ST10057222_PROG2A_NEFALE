@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,10 @@ namespace ST10057222_PROG2A_NEFALE
              * 
              */
 
+            Console.BackgroundColor= ConsoleColor.Magenta;
+            Console.WriteLine("\r\rWELCOME");
+            Console.BackgroundColor = ConsoleColor.Black;
+
 
             // Initialize a string variable called "input" with a null value
             string input = null;
@@ -36,11 +41,22 @@ namespace ST10057222_PROG2A_NEFALE
             // Start a loop that continues until the user enters "4"
             while (input != "4")
             {
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Menu:");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("VIEW RECIPE");
+                Console.ForegroundColor = ConsoleColor.White;
                 // Display a menu of options to the user
                 Console.WriteLine("select an option:");
                 Console.WriteLine("1. Input new recipe");
                 Console.WriteLine("2. View recipe");
-                Console.WriteLine("3. Exit");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("3. Clear");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("4. Exit");
 
                 // Read the user's input from the console
                 input = Console.ReadLine();
@@ -56,8 +72,14 @@ namespace ST10057222_PROG2A_NEFALE
                         // If the user entered "2", call a method called "viewRecipe()"
                         viewRecipe();
                         break;
-                    case "3":
+                    case"3":
+                        clearData();
+                        break;
+                    case "4":
                         // If the user entered "3", exit the program
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("GOODBYE");
+                        Console.ForegroundColor = ConsoleColor.White;
                         Environment.Exit(-1);
                         break;
                     default:
@@ -85,7 +107,7 @@ namespace ST10057222_PROG2A_NEFALE
              *          7.input steps
              * 
              */
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("New recipe");
             Console.ForegroundColor = ConsoleColor.White;
 
@@ -238,6 +260,8 @@ namespace ST10057222_PROG2A_NEFALE
                  * 
                  */
 
+            
+
 
             string selection = null;
 
@@ -248,9 +272,9 @@ namespace ST10057222_PROG2A_NEFALE
 
 
                 // prompt the user to select a scaling option or exit
-                Console.ForegroundColor= ConsoleColor.Magenta;
-                Console.WriteLine("View recipe");
-                Console.ForegroundColor= ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("VIEW RECIPE");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Select:\r\n 1. original\r\n 2. x 0.5\r\n 3. x 2\r\n 4. x 3\r\n 5. <--- return");
                 selection = Console.ReadLine();
 
@@ -344,6 +368,13 @@ namespace ST10057222_PROG2A_NEFALE
                             counter1++;
                         }
 
+                        break;
+
+                    case "5":
+                        //exit
+                        break;
+                    default: 
+                            Console.WriteLine("incorrect selection!!\n");
                         break;
 
                 }
@@ -519,6 +550,21 @@ namespace ST10057222_PROG2A_NEFALE
             }
 
             return quant + " " + units;
+
+        }
+
+
+        public static void clearData()
+        {
+
+            // Set the properties of aRRys object with the recipe information
+            food.setRecipeName(null);
+            food.setNumOfIngredients(0);
+            food.setNumOfSteps(0);
+            food.setArry1(null);
+            food.setArry2(null);
+            food.setArry3(null);
+            food.setArry4(null);
 
         }
 
