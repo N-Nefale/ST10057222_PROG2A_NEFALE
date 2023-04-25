@@ -180,6 +180,35 @@ namespace ST10057222_PROG2A_NEFALE
         }
 
 
+        public static string[] procedure()
+        {
+
+            // The user is asked to enter the number of steps in the recipe.
+            Console.WriteLine("Please enter the number of steps in this recipe");
+            int numOfSteps = int.Parse(Console.ReadLine());
+
+            // An array of strings is created to store the steps entered by the user.
+            string[] steps = new string[numOfSteps];
+            int b = 0;
+            int stepProg = 1;
+
+            // The user is prompted to enter each step in the recipe.
+            while (b < numOfSteps)
+            {
+
+                Console.WriteLine("Please enter step " + stepProg + " of the recipe: ");
+                steps[b] = Console.ReadLine();
+
+                b++;
+                stepProg++;
+
+            }
+
+            // The array of steps is returned to the calling method.
+            return steps;
+
+        }
+
 
 
         public static void viewRecipe()
