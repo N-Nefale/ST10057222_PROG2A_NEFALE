@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ST10057222_PROG2A_NEFALE
 {
@@ -84,7 +85,9 @@ namespace ST10057222_PROG2A_NEFALE
              *          7.input steps
              * 
              */
-
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("New recipe");
+            Console.ForegroundColor = ConsoleColor.White;
 
             // Ask the user to enter the name of the recipe
             Console.WriteLine("Please enter the name of the recipe: ");
@@ -97,7 +100,7 @@ namespace ST10057222_PROG2A_NEFALE
 
             // Create arrays to hold the ingredients, quantities, and units of measurement
             string[] ingredientsList = new string[numOfIngredients];
-            string[] ingredientsQuantity = new String[numOfIngredients];
+            string[] ingredientsQuantity = new string[numOfIngredients];
             string[] ingredientsMeasurement = new string[numOfIngredients];
 
             // Use a while loop to prompt the user to enter information for each ingredient
@@ -112,7 +115,7 @@ namespace ST10057222_PROG2A_NEFALE
                 ingredientsQuantity[a] = Console.ReadLine();
 
                 // Ask the user to select the unit of measurement for the ingredient
-                Boolean flag1 = false;
+                bool flag1 = false;
 
                 do
                 {
@@ -211,19 +214,142 @@ namespace ST10057222_PROG2A_NEFALE
 
 
 
+
         public static void viewRecipe()
         {
+            // get the recipe information from the RecipeArray class
+            string tempVal1 = food.getRecipeName();
+            string[] tempArry1 = food.getArry1();
+            string[] tempArry2 = food.getArry2();
+            string[] tempArry3 = food.getArry3();
+            string[] tempArry4 = food.getArry4();
+            int tempVal2 = food.getNumOfIngedients();
+            int tempVal3 = food.getNumOfSteps();
+
 
             /*Dispplay the recipe in full 
                  * View recipe:
                  *      scale- 
                  *          1. x1
-                 *          2. x2
-                 *          3. x3
-                 *          4. x4
+                 *          2. x0.5
+                 *          3. x2
+                 *          4. x3
+                 *          5. Return 
                  * 
                  */
 
+
+            string selection = null;
+
+            int counter1 = 0;
+
+            do
+            {
+
+
+                // prompt the user to select a scaling option or exit
+                Console.ForegroundColor= ConsoleColor.Magenta;
+                Console.WriteLine("View recipe");
+                Console.ForegroundColor= ConsoleColor.White;
+                Console.WriteLine("Select:\r\n 1. original\r\n 2. x 0.5\r\n 3. x 2\r\n 4. x 3\r\n 5. <--- return");
+                selection = Console.ReadLine();
+
+                // display the recipe with the chosen scaling option
+                switch (selection)
+                {
+                    // case 1: display the original recipe
+                    case "1":
+                        Console.WriteLine("Ingredients: ");
+                        for (int c = 0; c < tempVal2; c++)
+                        {
+                            // display the ingredient name, quantity, and unit of measurement
+                            Console.WriteLine(c + 1 + ". " + tempArry1[c] + "  " + tempArry2[c] + "  " + tempArry3[c]);
+                        }
+
+                        //display the step of recipe
+                        Console.WriteLine("Steps: ");
+                        counter1 = 1;
+                        for (int d = 0; d < tempVal3; d++)
+                        {
+
+                            Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
+                            counter1++;
+                        }
+
+                        break;
+                    // case 2: display the recipe with quantities scaled down by 50%
+                    case "2":
+                        Console.WriteLine("Ingredients: ");
+                        for (int c = 0; c < tempVal2; c++)
+                        {
+                            // scale the ingredient quantity by 0.5 and display the ingredient name, scaled quantity, and unit of measurement
+                            double math = double.Parse(tempArry2[c]) / 2;
+                            string[] storage = new string[2] { math.ToString(), tempArry3[c] };
+                            Console.WriteLine(c + 1 + ". " + tempArry1[c] + "  " + math + "  " + tempArry3[c]);
+                        }
+
+                        //display the step of recipe
+                        Console.WriteLine("Steps: ");
+                        counter1 = 1;
+                        for (int d = 0; d < tempVal3; d++)
+                        {
+
+                            Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
+                            counter1++;
+                        }
+
+                        break;
+
+                    // case 3: display the recipe with quantities scaled up by 200%
+                    case "3":
+                        Console.WriteLine("Ingredients: ");
+                        for (int c = 0; c < tempVal2; c++)
+                        {
+                            // scale the ingredient quantity by 2 and display the ingredient name, scaled quantity, and unit of measurement
+                            double math = double.Parse(tempArry2[c]) * 2;
+                            string[] storage = new string[2] { math.ToString(), tempArry3[c] };
+                            Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
+                        }
+
+                        //display the step of recipe
+                        Console.WriteLine("Steps: ");
+                        counter1 = 1;
+                        for (int d = 0; d < tempVal3; d++)
+                        {
+
+                            Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
+                            counter1++;
+                        }
+
+                        break;
+
+                    // case 4: display the recipe with quantities scaled up by 300%
+                    case "4":
+                        Console.WriteLine("Ingredients: ");
+                        for (int c = 0; c < tempVal2; c++)
+                        {
+                            // scale the ingredient quantity by 3 and display the ingredient name, scaled quantity, and unit of measurement
+                            double math = double.Parse(tempArry2[c]) * 3;
+                            string[] storage = new string[2] { math.ToString(), tempArry3[c] };
+                            Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
+                        }
+
+                        //display the step of recipe
+                        Console.WriteLine("Steps: ");
+                        counter1 = 1;
+                        for (int d = 0; d < tempVal3; d++)
+                        {
+
+                            Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
+                            counter1++;
+                        }
+
+                        break;
+
+                }
+
+
+            } while (selection != "5");
 
         }
 
