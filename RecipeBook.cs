@@ -142,7 +142,7 @@ namespace ST10057222_PROG2A_NEFALE
                 do
                 {
                     Console.WriteLine(
-                        "Please enter the unit of measurementConsole.WriteLine:\r\n 1. teaspoon\r\n 2. tablespoon\r\n 3. cup\r\n 4. quart");
+                        "Please enter the unit of measurementConsole.WriteLine:\r\n 1. teaspoon\r\n 2. tablespoon\r\n 3. cup\n");
                     string choice = Console.ReadLine();
 
                     // Use a switch statement to set the unit of measurement based on the user's choice
@@ -167,13 +167,6 @@ namespace ST10057222_PROG2A_NEFALE
                         flag1 = true;
 
                     }
-                    else if (choice.Equals("4"))
-                    {
-
-                        ingredientsMeasurement[a] = "quart";
-                        flag1 = true;
-
-                    }
                     else
                     {
                         Console.WriteLine("Incorrect selection");
@@ -181,6 +174,9 @@ namespace ST10057222_PROG2A_NEFALE
 
 
                 } while (flag1 != true);
+
+
+                
 
                 a++;
 
@@ -283,15 +279,40 @@ namespace ST10057222_PROG2A_NEFALE
                 {
                     // case 1: display the original recipe
                     case "1":
-                        Console.WriteLine("Ingredients: ");
+                        Console.WriteLine("Original\nIngredients: ");
                         for (int c = 0; c < tempVal2; c++)
                         {
+
                             // display the ingredient name, quantity, and unit of measurement
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + "  " + tempArry2[c] + "  " + tempArry3[c]);
                         }
 
+                        Console.WriteLine("\nScaled\nIngredients: ");
+                        for (int c = 0; c < tempVal2; c++)
+                        {
+                            // display the ingredient name, quantity, and unit of measurement
+                            if (tempArry3[c].Equals("tablespoon"))
+                            {
+
+                                int temp = int.Parse(tempArry2[c]) * 3;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+                            else
+                            if (tempArry3[c].Equals("cup"))
+                            {
+
+                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+
+                            string[] storage = new string[2] { tempArry2[c], tempArry3[c] };
+                            Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
+                        }
+
                         //display the step of recipe
-                        Console.WriteLine("Steps: ");
+                        Console.WriteLine("\nSteps: ");
                         counter1 = 1;
                         for (int d = 0; d < tempVal3; d++)
                         {
@@ -303,17 +324,33 @@ namespace ST10057222_PROG2A_NEFALE
                         break;
                     // case 2: display the recipe with quantities scaled down by 50%
                     case "2":
-                        Console.WriteLine("Ingredients: ");
+                        Console.WriteLine("\nIngredients: ");
                         for (int c = 0; c < tempVal2; c++)
                         {
                             // scale the ingredient quantity by 0.5 and display the ingredient name, scaled quantity, and unit of measurement
+
+                            if (tempArry3[c].Equals("tablespoon"))
+                            {
+
+                                int temp = int.Parse(tempArry2[c]) * 3;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+                            else
+                            if (tempArry3[c].Equals("cup"))
+                            {
+
+                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+
                             double math = double.Parse(tempArry2[c]) / 2;
-                            string[] storage = new string[2] { math.ToString(), tempArry3[c] };
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + "  " + math + "  " + tempArry3[c]);
                         }
 
                         //display the step of recipe
-                        Console.WriteLine("Steps: ");
+                        Console.WriteLine("\nSteps: ");
                         counter1 = 1;
                         for (int d = 0; d < tempVal3; d++)
                         {
@@ -326,17 +363,33 @@ namespace ST10057222_PROG2A_NEFALE
 
                     // case 3: display the recipe with quantities scaled up by 200%
                     case "3":
-                        Console.WriteLine("Ingredients: ");
+                        Console.WriteLine("\nIngredients: ");
                         for (int c = 0; c < tempVal2; c++)
                         {
                             // scale the ingredient quantity by 2 and display the ingredient name, scaled quantity, and unit of measurement
+                            if (tempArry3[c].Equals("tablespoon"))
+                            {
+
+                                int temp = int.Parse(tempArry2[c]) * 3;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+                            else
+                            if (tempArry3[c].Equals("cup"))
+                            {
+
+                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+
                             double math = double.Parse(tempArry2[c]) * 2;
                             string[] storage = new string[2] { math.ToString(), tempArry3[c] };
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
                         }
 
                         //display the step of recipe
-                        Console.WriteLine("Steps: ");
+                        Console.WriteLine("\nSteps: ");
                         counter1 = 1;
                         for (int d = 0; d < tempVal3; d++)
                         {
@@ -349,17 +402,33 @@ namespace ST10057222_PROG2A_NEFALE
 
                     // case 4: display the recipe with quantities scaled up by 300%
                     case "4":
-                        Console.WriteLine("Ingredients: ");
+                        Console.WriteLine("\nIngredients: ");
                         for (int c = 0; c < tempVal2; c++)
                         {
                             // scale the ingredient quantity by 3 and display the ingredient name, scaled quantity, and unit of measurement
+                            if (tempArry3[c].Equals("tablespoon"))
+                            {
+
+                                int temp = int.Parse(tempArry2[c]) * 3;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+                            else
+                            if (tempArry3[c].Equals("cup"))
+                            {
+
+                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
+                                tempArry2[c] = temp.ToString();
+
+                            }
+
                             double math = double.Parse(tempArry2[c]) * 3;
                             string[] storage = new string[2] { math.ToString(), tempArry3[c] };
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
                         }
 
                         //display the step of recipe
-                        Console.WriteLine("Steps: ");
+                        Console.WriteLine("\nSteps: ");
                         counter1 = 1;
                         for (int d = 0; d < tempVal3; d++)
                         {
@@ -374,7 +443,7 @@ namespace ST10057222_PROG2A_NEFALE
                         //exit
                         break;
                     default: 
-                            Console.WriteLine("incorrect selection!!\n");
+                            Console.WriteLine("\nincorrect selection!!\n");
                         break;
 
                 }
@@ -396,160 +465,115 @@ namespace ST10057222_PROG2A_NEFALE
             // Cast the quantity as an integer to get whole units
             int quantityTemp = (int)quant;
             // Use a switch statement to check which unit of measurement was input
-            switch (units)
-            {
-                case "teaspoon":
+
+                    int teaspoon = quantityTemp;
                     // If the input was in teaspoons and the quantity is at least 3 teaspoons, convert to tablespoons
-                    if (quantityTemp >= 3)
+                    if (teaspoon >= 3 && teaspoon > 0)
                     {
+
                         // Calculate how many tablespoons are in the quantity and how many teaspoons remain
-                        int temp1 = quantityTemp / 3;
-                        int temp2 = quantityTemp % 3;
-                        quantityTemp = temp1;
-                        units = "tablespoon";
-                        // If there are at least 16 tablespoons, convert to cups
-                        if (quantityTemp >= 16)
-                        {
-                            // Calculate how many cups are in the quantity and how many tablespoons remain
-                            temp1 = quantityTemp / 16;
-                            temp2 = quantityTemp % 16;
-                            quantityTemp = temp1;
-                            units = "cup";
-                            // If there are at least 4 cups, convert to quarts
-                            if (quantityTemp >= 4)
+                        int tablespoon = teaspoon / 3;
+                        teaspoon = teaspoon - (tablespoon * 3);
+
+                        if (teaspoon > 0)
+                        {  // If there are at least 16 tablespoons, convert to cups
+                            if (tablespoon >= 16 && tablespoon > 0)
                             {
-                                // Calculate how many quarts are in the quantity and how many cups remain
-                                temp1 = quantityTemp / 4;
-                                temp2 = quantityTemp % 4;
-                                quantityTemp = temp1;
-                                units = "quart";
-                                // If there are any cups remaining, return the quantity in quarts and cups
-                                if (temp2 > 0)
+
+                                // Calculate how many cups are in the quantity and how many tablespoons remain
+                                int cup = tablespoon / 16;
+                                tablespoon = tablespoon - (cup * 16);
+
+                                if (tablespoon > 0)
                                 {
-                                    return quantityTemp + " " + units + "\r and " + temp2 + " cup";
+
+                                    // If there are at least 4 cups, convert to quarts
+                                    if (cup > 0)
+                                    {
+
+
+                                        return cup + " cup " + tablespoon + " tablespoon " + teaspoon + " teaspoon";
+
+                                    }
+                                    else
+                                    {
+
+                                        return tablespoon + " tablespoon " + teaspoon + " teaspoon";
+
+                                    }
+
                                 }
-                                // Otherwise, return the quantity in quarts only
                                 else
                                 {
-                                    return quantityTemp + " " + units;
+
+                                    // If there are at least 4 cups, convert to quarts
+                                    if (cup > 0)
+                                    {
+
+
+                                        return cup + " cup " + teaspoon + " teaspoon";
+
+                                    }
+                                    else
+                                    {
+
+                                        return teaspoon + " teaspoon";
+
+                                    }
+
                                 }
+
                             }
-                            // If there are any tablespoons remaining, return the quantity in cups and tablespoons
                             else
                             {
-                                if (temp2 > 0)
-                                {
-                                    return quantityTemp + " " + units + " and " + temp2 + " tablespoon";
-                                }
-                                // Otherwise, return the quantity in cups only
-                                else
-                                {
-                                    return quantityTemp + " " + units;
-                                }
+
+                                return tablespoon + " tablespoon " + teaspoon + " teaspoon";
+
+
                             }
                         }
-                        // If there are any teaspoons remaining, return the quantity in tablespoons and teaspoons
                         else
                         {
-                            if (temp2 > 0)
+
+                            // If there are at least 16 tablespoons, convert to cups
+                            if (tablespoon >= 16)
                             {
-                                return quantityTemp + " " + units + " and " + temp2 + " teaspoon";
+
+                                // Calculate how many cups are in the quantity and how many tablespoons remain
+                                int cup = tablespoon / 16;
+                                tablespoon = tablespoon - (cup * 16);
+
+                                // If there are at least 4 cups, convert to quarts
+                                if (cup > 0)
+                                {
+
+
+                                    return cup + " cup " + tablespoon + " tablespoon";
+
+                                }
+
+
                             }
-                            // Otherwise, return the quantity in tablespoons only
                             else
                             {
-                                return quantityTemp + " " + units;
-                            }
-                        }
-                    }
 
-                    break;
-                case "tablespoon":
-                    // If the input was in tablespoons and the quantity is at least 16 teaspoons, convert to cups
-                    if (quantityTemp >= 16)
+                                return tablespoon + " tablespoon";
+
+
+                            }
+
+                        }
+
+
+                    }
+                    else
                     {
 
-                        // Calculate how many cups are in the quantity and how many tablespoons remain
-                        int temp1 = quantityTemp / 16;
-                        int temp2 = quantityTemp % 16;
-                        quantityTemp = temp1;
-                        units = "cup";
-                        // If there are at least 4 cups, convert to quarts
-                        if (quantityTemp >= 4)
-                        {
-                            // Calculate how many quarts are in the quantity and how many cups remain
-                            temp1 = quantityTemp / 4;
-                            temp2 = quantityTemp % 4;
-                            quantityTemp = temp1;
-                            units = "quart";
-                            if (temp2 > 0)
-                            {
-                                // If there are any cups remaining, return the quantity in quarts and cups
-                                return quantityTemp + " " + units + " and " + temp2 + " cup";
-
-                            }
-                            else
-                            {
-                                // Otherwise, return the quantity in quarts only
-                                return quantityTemp + " " + units;
-
-                            }
-
-                        }
-                        // If there are any tablespoons remaining, return the quantity in tablespoons and cups
-                        else
-                        {
-
-                            if (temp2 > 0)
-                            {
-
-                                return quantityTemp + " " + units + " and " + temp2 + " tablespoon";
-
-                            }
-                            // Otherwise, return the quantity in tablespoons only
-                            else
-                            {
-
-                                return quantityTemp + " " + units;
-
-                            }
-
-                        }
+                        return teaspoon + " teaspoon";
 
                     }
-
-                    break;
-
-                case "cup":
-                    // If the input was in cups and the quantity is at least 4 tablespoons, convert to cups
-                    if (quantityTemp >= 4)
-                    {
-                        // Calculate how many quarts are in the quantity and how many cups remain
-                        int temp1 = quantityTemp / 4;
-                        int temp2 = quantityTemp % 4;
-                        quantityTemp = temp1;
-                        units = "quart";
-                        // If there are at least 4 cups, convert to quarts
-                        if (temp2 > 0)
-                        {
-
-                            return quantityTemp + " " + units + " and " + temp2 + " cup";
-
-                        }
-                        else
-                        {
-                            // Otherwise, return the quantity in quarts only
-                            return quantityTemp + " " + units;
-
-                        }
-
-                    }
-
-                    break;
-
-            }
-
-            return quant + " " + units;
+     
+            return teaspoon + " " + units;
 
         }
 
