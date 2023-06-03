@@ -6,18 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace ST10057222_PROG2A_NEFALE
-{
+namespace ST10057222_PROG2A_NEFALE {
 
 
-    class RecipeBook
-    {
+    class RecipeBook {
 
         public static Recipe food = new Recipe();
 
         // Define a public static method called "Main"
-        public static void Main()
-        {
+        public static void Main() {
 
 
 
@@ -30,7 +27,7 @@ namespace ST10057222_PROG2A_NEFALE
              * 
              */
 
-            Console.BackgroundColor= ConsoleColor.Magenta;
+            Console.BackgroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\r\rWELCOME");
             Console.BackgroundColor = ConsoleColor.Black;
 
@@ -39,8 +36,7 @@ namespace ST10057222_PROG2A_NEFALE
             string input = null;
 
             // Start a loop that continues until the user enters "4"
-            while (input != "4")
-            {
+            while (input != "4") {
 
                 Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine("Menu:");
@@ -62,8 +58,7 @@ namespace ST10057222_PROG2A_NEFALE
                 input = Console.ReadLine();
 
                 // Use a switch statement to determine which action to take based on the user's input
-                switch (input)
-                {
+                switch (input) {
                     case "1":
                         // If the user entered "1", call a method called "newRecipe()"
                         newRecipe();
@@ -72,7 +67,7 @@ namespace ST10057222_PROG2A_NEFALE
                         // If the user entered "2", call a method called "viewRecipe()"
                         viewRecipe();
                         break;
-                    case"3":
+                    case "3":
                         clearData();
                         break;
                     case "4":
@@ -92,8 +87,7 @@ namespace ST10057222_PROG2A_NEFALE
 
 
         // Define a public static method called "newRecipe"
-        public static void newRecipe()
-        {
+        public static void newRecipe() {
 
 
             /*Collect any information related to the recipe
@@ -122,61 +116,71 @@ namespace ST10057222_PROG2A_NEFALE
 
             // Create arrays to hold the ingredients, quantities, and units of measurement
             string[] ingredientsList = new string[numOfIngredients];
-            string[] ingredientsQuantity = new string[numOfIngredients];
+            double[] ingredientsQuantity = new double[numOfIngredients];
             string[] ingredientsMeasurement = new string[numOfIngredients];
 
             // Use a while loop to prompt the user to enter information for each ingredient
-            while (a < numOfIngredients)
-            {
+            while (a < numOfIngredients) {
                 // Ask the user to enter the ingredient name
                 Console.WriteLine("Please enter the ingredient name: ");
                 ingredientsList[a] = Console.ReadLine();
 
-                // Ask the user to enter the quantity of the ingredient
-                Console.WriteLine("Please enter the quantity of the ingredient: ");
-                ingredientsQuantity[a] = Console.ReadLine();
+                bool flag0 = false;
+                do
+                {
+
+                    // Ask the user to enter the quantity of the ingredient
+                    Console.WriteLine("Please enter the quantity of the ingredient: ");
+                    if (double.TryParse(Console.ReadLine(), out double tea)) {
+
+                        ingredientsQuantity[a] = tea;
+
+                    } 
+                    else 
+                    {
+
+                        Console.WriteLine("Incorrect input!!!\nPlease only make use of numbers as well as use \",\" for decimal points ");
+                    
+                    }
+                   
+                }
+                while (flag0 = false);
+                
 
                 // Ask the user to select the unit of measurement for the ingredient
                 bool flag1 = false;
 
-                do
-                {
+                do {
                     Console.WriteLine(
                         "Please enter the unit of measurementConsole.WriteLine:\r\n 1. teaspoon\r\n 2. tablespoon\r\n 3. cup\n");
                     string choice = Console.ReadLine();
 
                     // Use a switch statement to set the unit of measurement based on the user's choice
-                    if (choice.Equals("1"))
+                    switch (choice) 
                     {
 
-                        ingredientsMeasurement[a] = "teaspoon";
-                        flag1 = true;
-
+                        case "1":
+                            ingredientsMeasurement[a] = "teaspoon";
+                            flag1 = true;
+                            break; 
+                        case "2":
+                            ingredientsMeasurement[a] = "tablespoon";
+                            flag1 = true;
+                            break; 
+                        case"3":
+                            ingredientsMeasurement[a] = "cup";
+                            flag1 = true;
+                            break;
+                        default: Console.WriteLine("Incorrect selection");
+                            break;
+                    
                     }
-                    else if (choice.Equals("2"))
-                    {
-
-                        ingredientsMeasurement[a] = "tablespoon";
-                        flag1 = true;
-
-                    }
-                    else if (choice.Equals("3"))
-                    {
-
-                        ingredientsMeasurement[a] = "cup";
-                        flag1 = true;
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("Incorrect selection");
-                    }
-
+                    
 
                 } while (flag1 != true);
 
 
-                
+
 
                 a++;
 
@@ -201,8 +205,7 @@ namespace ST10057222_PROG2A_NEFALE
         }
 
 
-        public static string[] procedure()
-        {
+        public static string[] procedure() {
 
             // The user is asked to enter the number of steps in the recipe.
             Console.WriteLine("Please enter the number of steps in this recipe");
@@ -214,8 +217,7 @@ namespace ST10057222_PROG2A_NEFALE
             int stepProg = 1;
 
             // The user is prompted to enter each step in the recipe.
-            while (b < numOfSteps)
-            {
+            while (b < numOfSteps) {
 
                 Console.WriteLine("Please enter step " + stepProg + " of the recipe: ");
                 steps[b] = Console.ReadLine();
@@ -233,12 +235,11 @@ namespace ST10057222_PROG2A_NEFALE
 
 
 
-        public static void viewRecipe()
-        {
+        public static void viewRecipe() {
             // get the recipe information from the RecipeArray class
             string tempVal1 = food.getRecipeName();
             string[] tempArry1 = food.getArry1();
-            string[] tempArry2 = food.getArry2();
+            double[] tempArry2 = food.getArry2();
             string[] tempArry3 = food.getArry3();
             string[] tempArry4 = food.getArry4();
             int tempVal2 = food.getNumOfIngedients();
@@ -256,15 +257,14 @@ namespace ST10057222_PROG2A_NEFALE
                  * 
                  */
 
-            
+
 
 
             string selection = null;
 
             int counter1 = 0;
 
-            do
-            {
+            do {
 
 
                 // prompt the user to select a scaling option or exit
@@ -275,162 +275,151 @@ namespace ST10057222_PROG2A_NEFALE
                 selection = Console.ReadLine();
 
                 // display the recipe with the chosen scaling option
-                switch (selection)
-                {
+                switch (selection) {
                     // case 1: display the original recipe
                     case "1":
+
                         Console.WriteLine("Original\nIngredients: ");
-                        for (int c = 0; c < tempVal2; c++)
+
+                        for (int c = 0; c < tempVal2; c++) 
                         {
 
                             // display the ingredient name, quantity, and unit of measurement
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + "  " + tempArry2[c] + "  " + tempArry3[c]);
+
                         }
 
                         Console.WriteLine("\nScaled\nIngredients: ");
-                        for (int c = 0; c < tempVal2; c++)
-                        {
+
+                        for (int c = 0; c < tempVal2; c++) {
                             // display the ingredient name, quantity, and unit of measurement
-                            if (tempArry3[c].Equals("tablespoon"))
+                            if (tempArry3[c].Equals("tablespoon")) 
                             {
 
-                                int temp = int.Parse(tempArry2[c]) * 3;
-                                tempArry2[c] = temp.ToString();
+                                double temp = tempArry2[c] * 3;
+                                tempArry2[c] = temp;
 
-                            }
-                            else
-                            if (tempArry3[c].Equals("cup"))
-                            {
+                            } 
+                            
 
-                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
-                                tempArry2[c] = temp.ToString();
-
-                            }
-
-                            string[] storage = new string[2] { tempArry2[c], tempArry3[c] };
+                            string[] storage = new string[2] { Convert.ToString(tempArry2[c]), tempArry3[c] };
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
+
                         }
 
                         //display the step of recipe
                         Console.WriteLine("\nSteps: ");
                         counter1 = 1;
-                        for (int d = 0; d < tempVal3; d++)
+
+                        for (int d = 0; d < tempVal3; d++) 
                         {
 
                             Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
                             counter1++;
+
                         }
 
                         break;
                     // case 2: display the recipe with quantities scaled down by 50%
                     case "2":
+
                         Console.WriteLine("\nIngredients: ");
-                        for (int c = 0; c < tempVal2; c++)
+
+                        for (int c = 0; c < tempVal2; c++) 
                         {
                             // scale the ingredient quantity by 0.5 and display the ingredient name, scaled quantity, and unit of measurement
 
-                            if (tempArry3[c].Equals("tablespoon"))
+                            if (tempArry3[c].Equals("tablespoon")) 
                             {
 
-                                int temp = int.Parse(tempArry2[c]) * 3;
-                                tempArry2[c] = temp.ToString();
+                                double temp = tempArry2[c] * 3;
+                                tempArry2[c] = temp;
 
-                            }
-                            else
-                            if (tempArry3[c].Equals("cup"))
-                            {
-
-                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
-                                tempArry2[c] = temp.ToString();
-
-                            }
-
-                            double math = double.Parse(tempArry2[c]) / 2;
+                            } 
+                          
+                            double math = tempArry2[c] / 2;
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + "  " + math + "  " + tempArry3[c]);
                         }
 
                         //display the step of recipe
                         Console.WriteLine("\nSteps: ");
                         counter1 = 1;
-                        for (int d = 0; d < tempVal3; d++)
+
+                        for (int d = 0; d < tempVal3; d++) 
                         {
 
                             Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
                             counter1++;
+
                         }
 
                         break;
 
                     // case 3: display the recipe with quantities scaled up by 200%
                     case "3":
+
                         Console.WriteLine("\nIngredients: ");
-                        for (int c = 0; c < tempVal2; c++)
+
+                        for (int c = 0; c < tempVal2; c++) 
                         {
+
                             // scale the ingredient quantity by 2 and display the ingredient name, scaled quantity, and unit of measurement
-                            if (tempArry3[c].Equals("tablespoon"))
+                            if (tempArry3[c].Equals("tablespoon")) 
                             {
 
-                                int temp = int.Parse(tempArry2[c]) * 3;
-                                tempArry2[c] = temp.ToString();
+                                double temp = tempArry2[c] * 3;
+                                tempArry2[c] = temp;
 
-                            }
-                            else
-                            if (tempArry3[c].Equals("cup"))
-                            {
+                            } 
 
-                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
-                                tempArry2[c] = temp.ToString();
-
-                            }
-
-                            double math = double.Parse(tempArry2[c]) * 2;
+                            double math = tempArry2[c] * 2;
                             string[] storage = new string[2] { math.ToString(), tempArry3[c] };
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
+
                         }
 
                         //display the step of recipe
                         Console.WriteLine("\nSteps: ");
                         counter1 = 1;
-                        for (int d = 0; d < tempVal3; d++)
+
+                        for (int d = 0; d < tempVal3; d++) 
                         {
 
                             Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
                             counter1++;
+
                         }
 
                         break;
 
                     // case 4: display the recipe with quantities scaled up by 300%
                     case "4":
+
                         Console.WriteLine("\nIngredients: ");
-                        for (int c = 0; c < tempVal2; c++)
+
+                        for (int c = 0; c < tempVal2; c++) 
                         {
+
                             // scale the ingredient quantity by 3 and display the ingredient name, scaled quantity, and unit of measurement
-                            if (tempArry3[c].Equals("tablespoon"))
+                            if (tempArry3[c].Equals("tablespoon")) 
                             {
 
-                                int temp = int.Parse(tempArry2[c]) * 3;
-                                tempArry2[c] = temp.ToString();
+                                double temp = tempArry2[c] * 3;
+                                tempArry2[c] = temp;
 
-                            }
-                            else
-                            if (tempArry3[c].Equals("cup"))
-                            {
+                            } 
 
-                                int temp = (int.Parse(tempArry2[c]) * 3) * 16;
-                                tempArry2[c] = temp.ToString();
-
-                            }
-
-                            double math = double.Parse(tempArry2[c]) * 3;
+                            double math = tempArry2[c] * 3;
                             string[] storage = new string[2] { math.ToString(), tempArry3[c] };
                             Console.WriteLine(c + 1 + ". " + tempArry1[c] + " " + scale(storage));
+
                         }
 
                         //display the step of recipe
                         Console.WriteLine("\nSteps: ");
                         counter1 = 1;
-                        for (int d = 0; d < tempVal3; d++)
+
+                        for (int d = 0; d < tempVal3; d++) 
                         {
 
                             Console.WriteLine("Step " + counter1 + ". " + tempArry4[d]);
@@ -442,144 +431,59 @@ namespace ST10057222_PROG2A_NEFALE
                     case "5":
                         //exit
                         break;
-                    default: 
-                            Console.WriteLine("\nincorrect selection!!\n");
+                    default:
+                        Console.WriteLine("\nincorrect selection/input!!\nPlease only select from the options given");
                         break;
 
                 }
-
 
             } while (selection != "5");
 
         }
 
 
-        public static string scale(string[] storage)
-        {
+        public static string scale(string[] storage) {
 
-            // Parse the quantity as a double from the first string in the input array
-            double quant = double.Parse(storage[0]);
-            // Store the unit of measurement as a string
-            string units = storage[1];
+            // Parse the input teaspoon value from the storage array
+            double teaspoon = double.Parse(storage[0]);
+            string outp = null;
 
-            // Cast the quantity as an integer to get whole units
-            int quantityTemp = (int)quant;
-            // Use a switch statement to check which unit of measurement was input
+            // Check if teaspoon is greater than or equal to 3 and the target unit is not "cup"
+            if (teaspoon >= 3 && !storage[1].Equals("cup")) {
+                // Calculate the remainder after dividing teaspoon by 3
+                double temp1 = teaspoon % 3;
+                // Calculate the whole number of tablespoons
+                double tablespoon = (teaspoon - temp1) / 3;
+                // Round the remainder to 2 decimal places
+                teaspoon = Math.Round(temp1, 2, MidpointRounding.ToEven);
 
-                    int teaspoon = quantityTemp;
-                    // If the input was in teaspoons and the quantity is at least 3 teaspoons, convert to tablespoons
-                    if (teaspoon >= 3 && teaspoon > 0)
-                    {
+                // Check if tablespoon is greater than or equal to 16
+                if (tablespoon >= 16) {
+                    // Calculate the remainder after dividing tablespoon by 16
+                    double temp2 = tablespoon % 16;
+                    // Calculate the whole number of cups
+                    double cup = (tablespoon - temp2) / 16;
+                    // Update tablespoon with the remainder
+                    tablespoon = temp2;
 
-                        // Calculate how many tablespoons are in the quantity and how many teaspoons remain
-                        int tablespoon = teaspoon / 3;
-                        teaspoon = teaspoon - (tablespoon * 3);
-
-                        if (teaspoon > 0)
-                        {  // If there are at least 16 tablespoons, convert to cups
-                            if (tablespoon >= 16 && tablespoon > 0)
-                            {
-
-                                // Calculate how many cups are in the quantity and how many tablespoons remain
-                                int cup = tablespoon / 16;
-                                tablespoon = tablespoon - (cup * 16);
-
-                                if (tablespoon > 0)
-                                {
-
-                                    // If there are at least 4 cups, convert to quarts
-                                    if (cup > 0)
-                                    {
-
-
-                                        return cup + " cup " + tablespoon + " tablespoon " + teaspoon + " teaspoon";
-
-                                    }
-                                    else
-                                    {
-
-                                        return tablespoon + " tablespoon " + teaspoon + " teaspoon";
-
-                                    }
-
-                                }
-                                else
-                                {
-
-                                    // If there are at least 4 cups, convert to quarts
-                                    if (cup > 0)
-                                    {
-
-
-                                        return cup + " cup " + teaspoon + " teaspoon";
-
-                                    }
-                                    else
-                                    {
-
-                                        return teaspoon + " teaspoon";
-
-                                    }
-
-                                }
-
-                            }
-                            else
-                            {
-
-                                return tablespoon + " tablespoon " + teaspoon + " teaspoon";
-
-
-                            }
-                        }
-                        else
-                        {
-
-                            // If there are at least 16 tablespoons, convert to cups
-                            if (tablespoon >= 16)
-                            {
-
-                                // Calculate how many cups are in the quantity and how many tablespoons remain
-                                int cup = tablespoon / 16;
-                                tablespoon = tablespoon - (cup * 16);
-
-                                // If there are at least 4 cups, convert to quarts
-                                if (cup > 0)
-                                {
-
-
-                                    return cup + " cup " + tablespoon + " tablespoon";
-
-                                }
-
-
-                            }
-                            else
-                            {
-
-                                return tablespoon + " tablespoon";
-
-
-                            }
-
-                        }
-
-
-                    }
-                    else
-                    {
-
-                        return teaspoon + " teaspoon";
-
-                    }
-     
-            return teaspoon + " " + units;
-
+                    // Construct the output string with cups, tablespoons, and teaspoons
+                    outp = cup + " cups\n" + tablespoon.ToString() + " tablespoons\n" + teaspoon + " teaspoons";
+                    return outp;
+                } else {
+                    // Construct the output string with tablespoons and teaspoons
+                    outp = tablespoon.ToString() + " tablespoons\n" + teaspoon + " teaspoons";
+                    return outp;
+                }
+            } else {
+                // If teaspoon is less than 3 or the target unit is "cup", return the original teaspoon value with the target unit
+                outp = teaspoon + storage[1];
+                return outp;
+            }
         }
 
 
-        public static void clearData()
-        {
+
+        public static void clearData() {
 
             // Set the properties of aRRys object with the recipe information
             food.setRecipeName(null);
@@ -593,7 +497,4 @@ namespace ST10057222_PROG2A_NEFALE
         }
 
     }
-
-
-
 }
