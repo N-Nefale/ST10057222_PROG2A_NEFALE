@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\lab_services_student\\.nuget\\packages\\": {}
+    "C:\\Users\\nefal\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lab_services_student\\source\\repos\\ST10057222_PROG2A_NEFALE\\ST10057222_PROG2A_NEFALE.csproj",
+      "projectUniqueName": "C:\\Users\\nefal\\OneDrive\\Documents\\GitHub\\ST10057222_PROG2A_NEFALE\\ST10057222_PROG2A_NEFALE.csproj",
       "projectName": "ST10057222_PROG2A_NEFALE",
-      "projectPath": "C:\\Users\\lab_services_student\\source\\repos\\ST10057222_PROG2A_NEFALE\\ST10057222_PROG2A_NEFALE.csproj",
-      "packagesPath": "C:\\Users\\lab_services_student\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lab_services_student\\source\\repos\\ST10057222_PROG2A_NEFALE\\obj\\",
+      "projectPath": "C:\\Users\\nefal\\OneDrive\\Documents\\GitHub\\ST10057222_PROG2A_NEFALE\\ST10057222_PROG2A_NEFALE.csproj",
+      "packagesPath": "C:\\Users\\nefal\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nefal\\OneDrive\\Documents\\GitHub\\ST10057222_PROG2A_NEFALE\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lab_services_student\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nefal\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
