@@ -1,9 +1,11 @@
 ﻿namespace ST10057222_PROG2A_NEFALE;
 
+public delegate void intDelegate(int countCal);
 class RecipeBook
 {
         
     private static List<Recipe> bookRecipes = new List<Recipe>();
+    private static int calWrng = 0;
     
     public static void Main()
     {
@@ -82,6 +84,7 @@ class RecipeBook
     public static void addRecipe()
     {
         string input = null;
+        calWrng = 0;
         Recipe cookRecipe = new Recipe();
         Ingredient igrdnt = new Ingredient();
         List<Ingredient> ingredientsList = new List<Ingredient>();
@@ -109,7 +112,7 @@ class RecipeBook
             // Ask the user to enter the ingredient name
             Console.WriteLine("Please enter the name of the ingredient: ");
             igrdnt.setName(Console.ReadLine());
-                
+            igrdnt.setFoodGroup();    
             bool flag0 = false;
             do
             {
@@ -134,6 +137,8 @@ class RecipeBook
                 
             }
             while (flag0 == false);
+            
+            
             
             // Ask the user to select the unit of measurement for the ingredient
             bool flag1 = false;
@@ -163,7 +168,11 @@ class RecipeBook
                         break;
                     
                 }
-                    
+                
+                Console.WriteLine("Please enter the amount of calories in this ingredient:");
+                int calories = int.Parse(Console.ReadLine());
+                warning(calories);
+
 
             } while (flag1 != true);
             
@@ -219,38 +228,34 @@ class RecipeBook
         do
         {
 
-            // Ask the user to enter the quantity of the ingredient
+            // Ask the user to enter which recipe do they want to view
             Console.WriteLine("Please enter the number of the recipe you want to view:");
             string input = Console.ReadLine();
                 
-            if (int.TryParse(input, out int selection) && selection <= bookRecipes.Count) 
+            if (int.TryParse(input, out int selection)) 
             {
-                    
-                scale(selection);
+                 
+                r1 = bookRecipes[selection-1];
+                scale(r1);
                 flag0 = true;
 
             } 
             else 
             {
 
-                Console.WriteLine("Incorrect input!!!\nPlease only make use of numbers ONLY");
+                Console.WriteLine("Incorrect input!!!\nPlease ONLY make use of numbers!");
                     
             }
                 
         }
         while (flag0 == false);
-
-        IDictionary<int, string> step = r1.getProcedure();
-
-        foreach(KeyValuePair<int, string> kvp in step)
-            Console.WriteLine("Step{0}: {1}", kvp.Key, kvp.Value);
         
-        //bookRecipes = 
-        //List<Ingredient> ingredientsList = new List<Ingredient>();
             
     }
 
-    public static void scale(int slct)
+    
+    
+    public static void scale(Recipe display)
     {
         
         /*Dispplay the recipe in full 
@@ -263,10 +268,157 @@ class RecipeBook
         *          5. Return 
         * 
         */
+        string input = null;
+        List<Ingredient> lstIngr = display.getlistOfIngredient();
+        Ingredient ingrdntTemp = new Ingredient();
+        string[] conv = new string[2];
+        do
+        {
+            Console.WriteLine("Please select what factor you would like your recipe to be scaled by:\n\t1. 0.5x\n\t2. Original\n\t3. 2x\n\t4. 3x\n\t5. <---Return");
+            input = Console.ReadLine();
+
+            switch (input)
+            {
+                
+                case "1":
+                    Console.WriteLine("Recipe name: " + display.getRecipeName());
+                    Console.WriteLine("\tIngredients: ");
+                    for(int d = 0; d < lstIngr.Count; d++)
+                    {
+                        
+                        ingrdntTemp = lstIngr[d];
+                        Console.WriteLine(d + 1 +".\nName: " + ingrdntTemp.getName());
+                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
+                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity()/2);
+                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
+                        Console.WriteLine(convertMass(conv));
+
+                    }
+                    break;
+                case "2":
+                    Console.WriteLine("Recipe name: " + display.getRecipeName());
+                    Console.WriteLine("\tIngredients: ");
+                    for (int d = 0; d < lstIngr.Count; d++)
+                    {
+
+                        ingrdntTemp = lstIngr[d];
+                        Console.WriteLine(d + 1 + ".\nName: " + ingrdntTemp.getName());
+                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
+                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity());
+                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
+                        Console.WriteLine(convertMass(conv));
+                    }
+                    break;
+                case "3":
+                    Console.WriteLine("Recipe name: " + display.getRecipeName());
+                    Console.WriteLine("\tIngredients: ");
+                    for (int d = 0; d < lstIngr.Count; d++)
+                    {
+
+                        ingrdntTemp = lstIngr[d];
+                        Console.WriteLine(d + 1 + ".\nName: " + ingrdntTemp.getName());
+                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
+                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity()*2);
+                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
+                        Console.WriteLine(convertMass(conv));
+                    }
+                    break;
+                case "4":
+                    Console.WriteLine("Recipe name: " + display.getRecipeName());
+                    Console.WriteLine("\tIngredients: ");
+                    for (int d = 0; d < lstIngr.Count; d++)
+                    {
+
+                        ingrdntTemp = lstIngr[d];
+                        Console.WriteLine(d + 1 + ".\nName: " + ingrdntTemp.getName());
+                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
+                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity() * 3);
+                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
+                        Console.WriteLine(convertMass(conv));
+                    }
+                    break;
+                case "5":
+                    
+                    break;
+                default:
+                    Console.WriteLine("Incorrect input!!!\nPlease ONLY make use of numbers!");
+                    break;
+                
+                
+            }
+
+        } while (input != "5");
         
         
+        IDictionary<int, string> step = display.getProcedure();
+
+        foreach (KeyValuePair<int, string> kvp in step)
+        {
+            
+            Console.WriteLine("Step{0}: {1}", kvp.Key, kvp.Value);   
+            
+        }
+
+    }
+
+
+    public static string convertMass(string[] storage)
+    {
+        
+        // Parse the input teaspoon value from the storage array
+        double teaspoon = double.Parse(storage[0]);
+        string outp = null;
+
+        // Check if teaspoon is greater than or equal to 3 and the target unit is not "cup"
+        if (teaspoon >= 3 && !storage[1].Equals("cup")) {
+            // Calculate the remainder after dividing teaspoon by 3
+            double temp1 = teaspoon % 3;
+            // Calculate the whole number of tablespoons
+            double tablespoon = (teaspoon - temp1) / 3;
+            // Round the remainder to 2 decimal places
+            teaspoon = Math.Round(temp1, 2, MidpointRounding.ToEven);
+
+            // Check if tablespoon is greater than or equal to 16
+            if (tablespoon >= 16) {
+                // Calculate the remainder after dividing tablespoon by 16
+                double temp2 = tablespoon % 16;
+                // Calculate the whole number of cups
+                double cup = (tablespoon - temp2) / 16;
+                // Update tablespoon with the remainder
+                tablespoon = temp2;
+
+                // Construct the output string with cups, tablespoons, and teaspoons
+                outp = cup + " cups\n" + tablespoon.ToString() + " tablespoons\n" + teaspoon + " teaspoons";
+                return outp;
+            } else {
+                // Construct the output string with tablespoons and teaspoons
+                outp = tablespoon.ToString() + " tablespoons\n" + teaspoon + " teaspoons";
+                return outp;
+            }
+        } else {
+            // If teaspoon is less than 3 or the target unit is "cup", return the original teaspoon value with the target unit
+            outp = teaspoon + storage[1];
+            return outp;
+        }
         
     }
+
+
+    private static intDelegate warning = (int calories) =>
+    {
+
+        calWrng = +calories;
+
+        if (calWrng > 300)
+        {
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("THE CALORIES IN THIS RECIPE EXCEED 300!!!");
+            Console.ForegroundColor = ConsoleColor.White;
+
+        }
+
+    };
 
 }
     
