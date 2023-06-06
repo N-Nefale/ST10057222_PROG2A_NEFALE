@@ -4,9 +4,9 @@ public class Ingredient
 {
     
     // Declare array variables as fields.
-    private String Name;
-    private double Quantity;
-    private string unitMeasurment;
+    private static String Name;
+    private static double Quantity;
+    private static string unitMeasurment;
     
     // This is a constructor that takes no arguments.
     public Ingredient()
@@ -20,11 +20,10 @@ public class Ingredient
     public Ingredient(String iName, double iQuant, string unitMes)
     {
 
-        this.Name = iName;
-        this.Quantity = iQuant;
-        this.unitMeasurment = unitMes;
-
-
+        Name = iName;
+        Quantity = iQuant;
+        unitMeasurment = unitMes;
+        
     }
     
     
@@ -38,7 +37,7 @@ public class Ingredient
     }
 
     // This method gets the values stored in Name.
-    public string getName() 
+    public static string getName() 
     {
         
         // Return the name field of the object.
@@ -56,7 +55,7 @@ public class Ingredient
     }
 
     // This method gets the values stored in Name.
-    public double getQuantity() 
+    public static double getQuantity() 
     {
         
         // Return the name field of the object.
@@ -74,7 +73,7 @@ public class Ingredient
     }
 
     // This method gets the values stored in Name.
-    public string getMeasurment() 
+    public static string getMeasurment() 
     {
         
         // Return the name field of the object.
@@ -86,7 +85,7 @@ public class Ingredient
     public static string toString() 
     {
 
-        return null;
+        return "\nIngredient name: " + Name + "\nQuantity: " + Quantity + " " + unitMeasurment;
 
     }
     

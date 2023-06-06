@@ -5,10 +5,10 @@ class Recipe
 {
 
     // Declare array variables as fields.
-    private string Name;
-    private List<Ingredient> listOfIngredient = new List<Ingredient>();
-    private IDictionary<int, string> procedures = new Dictionary<int, string>();
-
+    private static string Name;
+    private static List<Ingredient> listOfIngredient = new List<Ingredient>();
+    private static IDictionary<int, string> procedures = new Dictionary<int, string>();
+    
     // This is a constructor that takes no arguments.
     public Recipe()
     {
@@ -22,9 +22,9 @@ class Recipe
     {
 
         // Assign the input arguments to the corresponding fields of the object.
-        this.Name = rName;
-        this.listOfIngredient = rIngredients;
-        this.procedures = rProcedure;
+        Name = rName;
+        listOfIngredient = rIngredients;
+        procedures = rProcedure;
 
 
     }
@@ -75,7 +75,7 @@ class Recipe
     }
 
     // This method gets the second array of the recipe.
-    public IDictionary<int, string> getArry2()
+    public IDictionary<int, string> getProcedure()
     {
 
         // Return the procedures field of the object.
@@ -84,10 +84,10 @@ class Recipe
     }
 
 
-    public static string toString()
+    public string toString()
     {
-
-        return null;
+        
+        return "\nRecipe name: " + Name + "\nIngerients:\n" + listOfIngredient.ToString() + "\nSteps:\n" + procedures.ToString();
 
     }
 
