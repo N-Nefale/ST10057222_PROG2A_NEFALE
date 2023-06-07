@@ -62,7 +62,7 @@ namespace ST10057222_PROG2A_NEFALE;
                         ViewRecipes(recipesBk);
                         break;
                     case 3:
-                        //clearData()
+                        clearData();
                         break;
                     case 4:
                         // If the user entered "3", exit the program
@@ -494,10 +494,13 @@ namespace ST10057222_PROG2A_NEFALE;
             }
         }
 
-        public void clearData()
+        public static  void clearData()
         {
             
             recipesBk.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\t\tAll data has been cleared!!!\n");
+            Console.ForegroundColor = ConsoleColor.White;
             
         }
 
