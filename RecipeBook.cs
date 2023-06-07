@@ -1,425 +1,521 @@
-﻿namespace ST10057222_PROG2A_NEFALE;
+﻿using System;
+using System.Collections.Generic;
 
-public delegate void intDelegate(int countCal);
-class RecipeBook
-{
-        
-    private static List<Recipe> bookRecipes = new List<Recipe>();
-    private static int calWrng = 0;
-    
-    public static void Main()
+namespace ST10057222_PROG2A_NEFALE;
+
+
+    class Program
     {
+        public static SortedDictionary<string, Recipe> recipesBk = new SortedDictionary<string, Recipe>();
+        public delegate void intDelegate(int countCal);
 
-
-        /*Get the user to make a selection from the options provided below
-        * Menu:
-        *      1.New recipe
-        *      2.View recipe
-        *      3.Exit
-        * 
-        */
-
-        Console.BackgroundColor = ConsoleColor.Magenta;
-        Console.WriteLine("\t\t\t\tWELCOME");
-        Console.BackgroundColor = ConsoleColor.Black;
-
-
-        // Initialize a string variable called "input" with a null value
-        string input = null;
-
-        // Start a loop that continues until the user enters "4"
-        while (input != "4")
+        private static int calWrn = 0;
+        
+        static void Main(string[] args)
         {
+            /*Get the user to make a selection from the options provided below
+             * Menu:
+             *      1.New recipe
+             *      2.View recipe
+             *      3.Clear all data
+             *      3.Exit
+             * 
+             */
 
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("\t\tMenu:");
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\r\rWELCOME");
             Console.BackgroundColor = ConsoleColor.Black;
 
-            // Display a menu of options to the user
-            Console.WriteLine("select an option:");
-            Console.WriteLine("1. Add new recipe");
-            Console.WriteLine("2. View recipes");
-            Console.WriteLine("3. Clear all data");
-            Console.WriteLine("4. Exit");
 
-            // Read the user's input from the console
-            input = Console.ReadLine();
+            // Initialize a string variable called "input" with a null value
+            int input = 0;
 
-            // Use a switch statement to determine which action to take based on the user's input
-            switch (input)
+            // Start a loop that continues until the user enters "4"
+            while (input != 4)
             {
-            
-                case "1":
-                    // If the user entered "1", call a method called "newRecipe()"
-                    addRecipe();
-                    Console.WriteLine("\n\n");
-                    break;
-                case "2":
-                    // If the user entered "2", call a method called "viewRecipe()"
-                    viewRecipes();
-                    break;
-                case "3":
-                    //clearData();
-                    break;
-                case "4":
-                    // If the user entered "3", exit the program
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("GOODBYE");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Environment.Exit(-1);
-                    break;
-                default:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nIncorrect selection/input!!!!!!\n");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    break;
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Menu:");
+                Console.ForegroundColor = ConsoleColor.White;
 
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("VIEW RECIPE");
+                Console.ForegroundColor = ConsoleColor.White;
+                // Display a menu of options to the user
+                Console.WriteLine("select an option:");
+                Console.WriteLine("1. Input new recipe");
+                Console.WriteLine("2. View recipe");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("3. Clear");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("4. Exit");
+
+                input = int.Parse(Console.ReadLine());
+
+                switch (input)
+                {
+                    case 1:
+                        // If the user entered "1", call a method called "newRecipe()"
+                        AddRecipe();
+                        break;
+                    case 2:
+                        // If the user entered "2", call a method called "viewRecipe()"
+                        ViewRecipes(recipesBk);
+                        break;
+                    case 3:
+                        //clearData()
+                        break;
+                    case 4:
+                        // If the user entered "3", exit the program
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("GOODBYE");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Environment.Exit(-1);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
             }
-                
         }
-            
-    }
-        
-        
-    public static void addRecipe()
-    {
-        string input = null;
-        calWrng = 0;
-        Recipe cookRecipe = new Recipe();
-        Ingredient igrdnt = new Ingredient();
-        List<Ingredient> ingredientsList = new List<Ingredient>();
-        IDictionary<int, string> steps = new Dictionary<int, string>();
 
-        Console.BackgroundColor = ConsoleColor.Blue;
-        Console.WriteLine("Add new recipe:\n");
-        Console.BackgroundColor = ConsoleColor.Black;
-
-        // Ask the user to enter the name of the recipe
-        Console.WriteLine("Please enter the name of the recipe");
-        input = Console.ReadLine();
-        cookRecipe.setRecipeName(input);
-            
-        
-        
-        
-        // Ask the user to enter the number of ingredients in the recipe
-        Console.WriteLine("Please enter the number of ingredients in the recipe: ");
-        int numOfIngredients = int.Parse(Console.ReadLine());
-
-        for (int a = 0; a<numOfIngredients;a++)
+        static void AddRecipe()
         {
-                
-            // Ask the user to enter the ingredient name
-            Console.WriteLine("Please enter the name of the ingredient: ");
-            igrdnt.setName(Console.ReadLine());
-            igrdnt.setFoodGroup();    
-            bool flag0 = false;
-            do
+            
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("New recipe");
+            Console.ForegroundColor = ConsoleColor.White;
+            
+            Recipe recipe = new Recipe();
+            
+            Console.WriteLine("Enter recipe name:");
+            string name = Console.ReadLine();
+
+            if (recipesBk.ContainsKey(name))
             {
+                Console.WriteLine("Recipe with the same name already exists.");
+                return;
+            }
+            
+            recipe.setName(name);
+                
+            List<Ingredient> iList = new List<Ingredient>();
+            
+            Console.WriteLine("Enter number of ingredients:");
+            int ingredientCount = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < ingredientCount; i++)
+            {
+                Console.WriteLine("Enter ingredient name:");
+                string iName= Console.ReadLine();
 
                 // Ask the user to enter the quantity of the ingredient
-                Console.WriteLine("Please enter the quantity of the ingredient: ");
-                input = Console.ReadLine();
+                double iquantity = 0;
                 
-                if (double.TryParse(input, out double tea)) 
+                bool flag0 = false;
+                do
                 {
                     
-                    igrdnt.setQuantity(tea);
-                    flag0 = true;
+                    Console.WriteLine("Please enter the quantity of the ingredient: ");
+                    if (double.TryParse(Console.ReadLine(), out double tea)) {
 
-                } 
-                else 
-                {
+                        iquantity = tea;
+                        flag0 = true;
 
-                    Console.WriteLine("Incorrect input!!!\nPlease only make use of numbers as well as use \",\" for decimal points ");
+                    } 
+                    else 
+                    {
+
+                        Console.WriteLine("Incorrect input!!!\nPlease only make use of numbers as well as use \",\" for decimal points ");
                     
+                    }
+                   
                 }
+                while (flag0 == false);
                 
-            }
-            while (flag0 == false);
-            
-            
-            
-            // Ask the user to select the unit of measurement for the ingredient
-            bool flag1 = false;
+                
+                // Ask the user to select the unit of measurement for the ingredient
+                string iUnit = null;
+                bool flag1 = false;
+                do 
+                {
+                    Console.WriteLine("Please enter the unit of measurementConsole.WriteLine:\r\n 1. teaspoon\r\n 2. tablespoon\r\n 3. cup\n");
+                    string choice = Console.ReadLine();
 
-            do {
-                Console.WriteLine(
-                    "Please enter the unit of measurement:\r\n 1. teaspoon\r\n 2. tablespoon\r\n 3. cup\n");
-                string choice = Console.ReadLine();
+                    // Use a switch statement to set the unit of measurement based on the user's choice
+                    switch (choice) 
+                    {
 
-                // Use a switch statement to set the unit of measurement based on the user's choice
-                switch (choice) 
+                        case "1":
+                            iUnit ="teaspoon";
+                            flag1 = true;
+                            break; 
+                        case "2":
+                            iUnit = "tablespoon";
+                            flag1 = true;
+                            break; 
+                        case"3":
+                            iUnit = "cup";
+                            flag1 = true;
+                            break;
+                        default: Console.WriteLine("Incorrect selection!");
+                            break;
+                    
+                    }
+                    
+
+                } while (flag1 != true);
+
+
+                string iFG = null;
+                bool flag2 = false;
+                do 
+                {
+                    
+                    // Ask the user to enter the food group of the ingredient
+                    Console.WriteLine("Please select the food group of the ingredient: \n1. Starchy foods\n2. Vegetables and fruits\n3. Dry beans, peas, lentils and soya\n4. Chicken, fish, meat and eggs\n5. Milk and dairy products\n6. Fats and oil\n7. Water");
+                    string choice = Console.ReadLine();
+
+                    switch (choice)
+                    {
+
+                        case "1":
+                            iFG = "Starchy foods";
+                            flag2 = true;
+                            break;
+                        case "2":
+                            iFG = "Vegetables and fruits";
+                            flag2 = true;
+                            break;
+                        case "3":
+                            iFG =  "Dry beans, peas, lentils and soya";
+                            flag2 = true;
+                            break;
+                        case "4":
+                            iFG = "Chicken, fish, meat and eggs";
+                            flag2 = true;
+                            break;
+                        case "5":
+                            iFG = "Milk and dairy products";
+                            flag2 = true;
+                            break;
+                        case "6":
+                            iFG = "Fats and oil";
+                            flag2 = true;
+                            break;
+                        case "7":
+                            iFG = "Water";
+                            flag2 = true;
+                            break;
+                        default:
+                            Console.WriteLine("Incorrect input/selection!!");
+                            break;
+
+                    }
+
+                } while (flag2 != true);
+
+                int icalories = 0;
+                bool flag3 = false;
+                do
                 {
 
-                    case "1":
-                        igrdnt.setMeasurment("teaspoon");
-                        flag1 = true;
-                        break; 
-                    case "2":
-                        igrdnt.setMeasurment("tablespoon");
-                        flag1 = true;
-                        break; 
-                    case"3":
-                        igrdnt.setMeasurment("cup");
-                        flag1 = true;
-                        break;
-                    default: Console.WriteLine("Incorrect selection");
-                        break;
+                    // Ask the user to enter the quantity of the ingredient
+                    Console.WriteLine("Please enter the amount calories in the ingredient: ");
+                    if (int.TryParse(Console.ReadLine(), out int tea)) {
+
+                        icalories = tea;
+                        warning(icalories);
+                        flag3 = true;
+
+                    } 
+                    else 
+                    {
+
+                        Console.WriteLine("Incorrect input!!!\nPlease only make use of numbers as well as use \",\" for decimal points ");
                     
+                    }
+                   
                 }
+                while (flag3 == false);
                 
-                Console.WriteLine("Please enter the amount of calories in this ingredient:");
-                int calories = int.Parse(Console.ReadLine());
-                warning(calories);
-
-
-            } while (flag1 != true);
-            
-        }
-
-        
-        // The user is asked to enter the number of steps in the recipe.
-        Console.WriteLine("Please enter the number of steps in this recipe");
-        int numOfSteps = int.Parse(Console.ReadLine());
-            
-        int count = 1;
-
-        // The user is prompted to enter each step in the recipe.
-        for(int b = 0; b < numOfSteps; b++)
-        {
-                
-            Console.WriteLine("Please enter step " + count + " of the recipe: ");
-            steps.Add(count,Console.ReadLine());
-                
-            count++;
-
-        }
-            
-            
-        ingredientsList.Add(igrdnt);
-        cookRecipe.setlistOfIngredient(ingredientsList);
-        cookRecipe.setProcedures(steps);
-            
-        bookRecipes.Add(cookRecipe);
-        
-        
-    }
-    
-    public static void viewRecipes()
-    {
-        Console.BackgroundColor = ConsoleColor.Blue;
-        Console.WriteLine("VIEW RECIPE");
-        Console.BackgroundColor = ConsoleColor.Black;
-        
-        Recipe r1 = new Recipe();
-        Console.WriteLine("Here is a list of recipes you could try:");
-        for (int c = 0; c < bookRecipes.Count; c++)
-        {
-
-            //get the recipe information from the RecipeArray class
-            r1 = bookRecipes[c];
-            Console.WriteLine(c+1+ " " + r1.getRecipeName());
-            
-        }
-
-        
-        bool flag0 = false;
-        do
-        {
-
-            // Ask the user to enter which recipe do they want to view
-            Console.WriteLine("Please enter the number of the recipe you want to view:");
-            string input = Console.ReadLine();
-                
-            if (int.TryParse(input, out int selection)) 
-            {
-                 
-                r1 = bookRecipes[selection-1];
-                scale(r1);
-                flag0 = true;
-
-            } 
-            else 
-            {
-
-                Console.WriteLine("Incorrect input!!!\nPlease ONLY make use of numbers!");
-                    
+                iList.Add(new Ingredient(iName,iquantity,iUnit,icalories,iFG));
             }
-                
-        }
-        while (flag0 == false);
-        
+            recipe.setIngredients(new List<Ingredient>(iList));
             
-    }
-
-    
-    
-    public static void scale(Recipe display)
-    {
-        
-        /*Dispplay the recipe in full 
-        * View recipe:
-        *      scale- 
-        *          1. x1
-        *          2. x0.5
-        *          3. x2
-        *          4. x3
-        *          5. Return 
-        * 
-        */
-        string input = null;
-        List<Ingredient> lstIngr = display.getlistOfIngredient();
-        Ingredient ingrdntTemp = new Ingredient();
-        string[] conv = new string[2];
-        do
-        {
-            Console.WriteLine("Please select what factor you would like your recipe to be scaled by:\n\t1. 0.5x\n\t2. Original\n\t3. 2x\n\t4. 3x\n\t5. <---Return");
-            input = Console.ReadLine();
-
-            switch (input)
+            Console.WriteLine("Enter number of steps:");
+            int stepCount = int.Parse(Console.ReadLine());
+            IDictionary<int, string> sList = new Dictionary<int, string>();
+            for (int i = 0; i < stepCount; i++)
             {
-                
-                case "1":
-                    Console.WriteLine("Recipe name: " + display.getRecipeName());
-                    Console.WriteLine("\tIngredients: ");
-                    for(int d = 0; d < lstIngr.Count; d++)
-                    {
-                        
-                        ingrdntTemp = lstIngr[d];
-                        Console.WriteLine(d + 1 +".\nName: " + ingrdntTemp.getName());
-                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
-                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity()/2);
-                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
-                        Console.WriteLine(convertMass(conv));
-
-                    }
-                    break;
-                case "2":
-                    Console.WriteLine("Recipe name: " + display.getRecipeName());
-                    Console.WriteLine("\tIngredients: ");
-                    for (int d = 0; d < lstIngr.Count; d++)
-                    {
-
-                        ingrdntTemp = lstIngr[d];
-                        Console.WriteLine(d + 1 + ".\nName: " + ingrdntTemp.getName());
-                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
-                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity());
-                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
-                        Console.WriteLine(convertMass(conv));
-                    }
-                    break;
-                case "3":
-                    Console.WriteLine("Recipe name: " + display.getRecipeName());
-                    Console.WriteLine("\tIngredients: ");
-                    for (int d = 0; d < lstIngr.Count; d++)
-                    {
-
-                        ingrdntTemp = lstIngr[d];
-                        Console.WriteLine(d + 1 + ".\nName: " + ingrdntTemp.getName());
-                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
-                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity()*2);
-                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
-                        Console.WriteLine(convertMass(conv));
-                    }
-                    break;
-                case "4":
-                    Console.WriteLine("Recipe name: " + display.getRecipeName());
-                    Console.WriteLine("\tIngredients: ");
-                    for (int d = 0; d < lstIngr.Count; d++)
-                    {
-
-                        ingrdntTemp = lstIngr[d];
-                        Console.WriteLine(d + 1 + ".\nName: " + ingrdntTemp.getName());
-                        Console.WriteLine("Food group: " + ingrdntTemp.getFoodGroup());
-                        conv[0] = Convert.ToString(ingrdntTemp.getQuantity() * 3);
-                        conv[1] = Convert.ToString(ingrdntTemp.getMeasurment());
-                        Console.WriteLine(convertMass(conv));
-                    }
-                    break;
-                case "5":
-                    
-                    break;
-                default:
-                    Console.WriteLine("Incorrect input!!!\nPlease ONLY make use of numbers!");
-                    break;
-                
-                
+                Console.WriteLine("Enter step:");
+                string step = Console.ReadLine();
+                sList.Add(i+1,step);
             }
-
-        } while (input != "5");
-        
-        
-        IDictionary<int, string> step = display.getProcedure();
-
-        foreach (KeyValuePair<int, string> kvp in step)
-        {
             
-            Console.WriteLine("Step{0}: {1}", kvp.Key, kvp.Value);   
+            recipe.setSteps(sList);
+            recipesBk.Add(recipe.getName(),new Recipe(recipe.getName(),recipe.getIngredients(),recipe.getSteps()));
             
-        }
-
-    }
-
-
-    public static string convertMass(string[] storage)
-    {
-        
-        // Parse the input teaspoon value from the storage array
-        double teaspoon = double.Parse(storage[0]);
-        string outp = null;
-
-        // Check if teaspoon is greater than or equal to 3 and the target unit is not "cup"
-        if (teaspoon >= 3 && !storage[1].Equals("cup")) {
-            // Calculate the remainder after dividing teaspoon by 3
-            double temp1 = teaspoon % 3;
-            // Calculate the whole number of tablespoons
-            double tablespoon = (teaspoon - temp1) / 3;
-            // Round the remainder to 2 decimal places
-            teaspoon = Math.Round(temp1, 2, MidpointRounding.ToEven);
-
-            // Check if tablespoon is greater than or equal to 16
-            if (tablespoon >= 16) {
-                // Calculate the remainder after dividing tablespoon by 16
-                double temp2 = tablespoon % 16;
-                // Calculate the whole number of cups
-                double cup = (tablespoon - temp2) / 16;
-                // Update tablespoon with the remainder
-                tablespoon = temp2;
-
-                // Construct the output string with cups, tablespoons, and teaspoons
-                outp = cup + " cups\n" + tablespoon.ToString() + " tablespoons\n" + teaspoon + " teaspoons";
-                return outp;
-            } else {
-                // Construct the output string with tablespoons and teaspoons
-                outp = tablespoon.ToString() + " tablespoons\n" + teaspoon + " teaspoons";
-                return outp;
-            }
-        } else {
-            // If teaspoon is less than 3 or the target unit is "cup", return the original teaspoon value with the target unit
-            outp = teaspoon + storage[1];
-            return outp;
+            Console.WriteLine("Recipe added successfully.\n\n");
         }
         
-    }
+        
+        
 
-
-    private static intDelegate warning = (int calories) =>
-    {
-
-        calWrng = +calories;
-
-        if (calWrng > 300)
+        static void ViewRecipes(SortedDictionary<string, Recipe> recipes)
         {
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("THE CALORIES IN THIS RECIPE EXCEED 300!!!");
+            
+            
+            /*Dispplay the recipe in full 
+                * View recipe:
+                *      scale- 
+                *          1. x1
+                *          2. x0.5
+                *          3. x2
+                *          4. x3
+                *          5. Return 
+                * 
+                */
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("View recipes");
             Console.ForegroundColor = ConsoleColor.White;
+            
+            
+            
+            if (recipes.Count == 0)
+            {
+                Console.WriteLine("No recipes found.");
+                return;
+            }
 
+            bool flag = false;
+            do
+            {
+                
+                Console.WriteLine("Select a recipe to view:");
+
+                int index = 1;
+                foreach (var recipe in recipes)
+                {
+                    Console.WriteLine($"{index}. {recipe.Key}");
+                    index++;
+                }
+                
+                int selectedRecipeIndex = int.Parse(Console.ReadLine());
+
+                if (selectedRecipeIndex < 1 || selectedRecipeIndex > recipes.Count)
+                {
+                    Console.WriteLine("Invalid recipe index.");
+                    return;
+                }
+                
+                string selectedRecipeName = recipes.Keys.ElementAt(selectedRecipeIndex - 1);
+                Recipe selectedRecipe = recipes[selectedRecipeName];
+                
+                Console.WriteLine("By what factor would you like to view the recipe: \n\t1. 0.5x\n\t2. Original\n\t3. x2\n\t4. x3\n\t5. <----Return");
+                string options = Console.ReadLine();
+
+                int totalCal = 0;
+                switch (options)
+                {
+                    
+                    case "1":
+                        
+
+                        Console.WriteLine($"Recipe: {selectedRecipe.getName()}");
+
+                        Console.WriteLine("\tIngredients:");
+                        foreach (var ingredient in selectedRecipe.getIngredients())
+                        {
+
+                            double temp = 0;
+                            if (ingredient.getMeasurment() == "tablespoon")
+                            {
+                                
+                                temp = ingredient.getQuantity()*3;
+                                
+                            }
+                            
+                            string[] storage = new string[2] { Convert.ToString(temp/2),ingredient.getMeasurment()};
+                            Console.WriteLine("\t" + ingredient.getName() + " " + scale(storage) + "\n\t"+ ingredient.getFoodgroup() + "\n\t " + ingredient.getCalories() + " calories") ;
+                            totalCal += ingredient.getCalories();
+                        }
+                        
+                        Console.WriteLine("Total calories: " + totalCal);
+                        Console.WriteLine("Steps:");
+                        foreach (var step in selectedRecipe.getSteps())
+                        {
+                            Console.WriteLine(step);
+                        }
+
+                        totalCal = 0;
+                        break;
+                    case "2":
+                        
+                        Console.WriteLine($"Recipe: {selectedRecipe.getName()}");
+
+                        Console.WriteLine("\tIngredients:");
+                        foreach (var ingredient in selectedRecipe.getIngredients())
+                        {
+
+                            double temp = 0;
+                            if (ingredient.getMeasurment() == "tablespoon")
+                            {
+                                
+                                temp = ingredient.getQuantity()*3;
+                                
+                            }
+                            
+                            string[] storage = new string[2] { Convert.ToString(temp),ingredient.getMeasurment()};
+                            Console.WriteLine("\t" + ingredient.getName() + " " + scale(storage) + "\n\t"+ ingredient.getFoodgroup() + "\n\t " + ingredient.getCalories() + " calories") ;
+                            totalCal += ingredient.getCalories();
+                        }
+
+                        Console.WriteLine("Steps:");
+                        foreach (var step in selectedRecipe.getSteps())
+                        {
+                            Console.WriteLine(step);
+                        }
+
+                        totalCal = 0;
+                        break;
+                    case "3":
+
+                        Console.WriteLine($"Recipe: {selectedRecipe.getName()}");
+
+                        Console.WriteLine("\tIngredients:");
+                        foreach (var ingredient in selectedRecipe.getIngredients())
+                        {
+
+                            double temp = 0;
+                            if (ingredient.getMeasurment() == "tablespoon")
+                            {
+                                
+                                temp = ingredient.getQuantity()*3;
+                                
+                            }
+                            
+                            string[] storage = new string[2] { Convert.ToString(temp*2),ingredient.getMeasurment()};
+                            Console.WriteLine("\t" + ingredient.getName() + " " + scale(storage) + "\n\t"+ ingredient.getFoodgroup() + "\n\t " + ingredient.getCalories() + " calories") ;
+                            totalCal += ingredient.getCalories();
+                        }
+
+                        Console.WriteLine("Steps:");
+                        foreach (var step in selectedRecipe.getSteps())
+                        {
+                            Console.WriteLine(step);
+                        }
+
+                        totalCal = 0;
+                        break;
+                    case "4":
+                        
+                        Console.WriteLine($"Recipe: {selectedRecipe.getName()}");
+
+                        Console.WriteLine("\tIngredients:");
+                        foreach (var ingredient in selectedRecipe.getIngredients())
+                        {
+
+                            double temp = 0;
+                            if (ingredient.getMeasurment() == "tablespoon")
+                            {
+                                
+                                temp = ingredient.getQuantity()*3;
+                                
+                            }
+                            
+                            string[] storage = new string[2] { Convert.ToString(temp*3),ingredient.getMeasurment()};
+                            Console.WriteLine("\t" + ingredient.getName() + " " + scale(storage) + "\n\t"+ ingredient.getFoodgroup() + "\n\t " + ingredient.getCalories() + " calories") ;
+                            totalCal += ingredient.getCalories();
+                        }
+
+                        Console.WriteLine("Steps:");
+                        foreach (var step in selectedRecipe.getSteps())
+                        {
+                            Console.WriteLine(step);
+                        }
+
+                        totalCal = 0;
+                        break;
+                    case "5":
+                        flag = true;
+                        break;
+                    default:
+                        Console.WriteLine("");
+                        break;
+                    
+                    
+                }
+
+
+            }while (flag != true);
+            
+                        
+        }
+        
+        
+        
+        public static string scale(string[] storage) {
+
+            // Parse the input teaspoon value from the storage array
+            double teaspoon = double.Parse(storage[0]);
+            string outp = null;
+
+            // Check if teaspoon is greater than or equal to 3 and the target unit is not "cup"
+            if (teaspoon >= 3 && !storage[1].Equals("cup")) 
+            {
+                // Calculate the remainder after dividing teaspoon by 3
+                double temp1 = teaspoon % 3;
+                // Calculate the whole number of tablespoons
+                double tablespoon = (teaspoon - temp1) / 3;
+                // Round the remainder to 2 decimal places
+                teaspoon = Math.Round(temp1, 2, MidpointRounding.ToEven);
+
+                // Check if tablespoon is greater than or equal to 16
+                if (tablespoon >= 16) {
+                    // Calculate the remainder after dividing tablespoon by 16
+                    double temp2 = tablespoon % 16;
+                    // Calculate the whole number of cups
+                    double cup = (tablespoon - temp2) / 16;
+                    // Update tablespoon with the remainder
+                    tablespoon = temp2;
+
+                    // Construct the output string with cups, tablespoons, and teaspoons
+                    outp = cup + " cups " + tablespoon.ToString() + " tablespoons " + teaspoon + " teaspoons";
+                    return outp;
+                } else {
+                    // Construct the output string with tablespoons and teaspoons
+                    outp = tablespoon.ToString() + " tablespoons " + teaspoon + " teaspoons";
+                    return outp;
+                }
+            } else {
+                // If teaspoon is less than 3 or the target unit is "cup", return the original teaspoon value with the target unit
+                outp = teaspoon + " " + storage[1];
+                return outp;
+            }
         }
 
-    };
+        public void clearData()
+        {
+            
+            recipesBk.Clear();
+            
+        }
 
-}
+        private static intDelegate warning = (int calories) =>
+        {
+
+            calWrn += calories;
+
+            if (calWrn > 300)
+            {
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("THE CALORIES IN THIS RECIPE EXCEED 300!!!");
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
+
+        };
+
+    }
     
-

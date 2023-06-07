@@ -4,10 +4,11 @@ public class Ingredient
 {
     
     // Declare array variables as fields.
-    private static String Name;
-    private static double Quantity;
-    private static string unitMeasurment;
-    private static string foodGroup;
+    private string Name;
+    private double Quantity;
+    private string unitMeasurment;
+    private int calories;
+    private string foodGroup;
     
     // This is a constructor that takes no arguments.
     public Ingredient()
@@ -18,21 +19,27 @@ public class Ingredient
     }
 
     // This is a constructor that takes several arguments.
-    public Ingredient(String iName, double iQuant, string unitMes)
+    public Ingredient(String n, double q, string u, int c,string f)
     {
 
-        Name = iName;
-        Quantity = iQuant;
-        unitMeasurment = unitMes;
-        
+        this.Name = n;
+        this.Quantity = q;
+        this.unitMeasurment = u;
+        this.calories = c;
+        this.foodGroup = f;
+
+
     }
     
     
-    // This method sets the name field.
+    
+    
+    
+    
+    // This method sets the name field of the recipe.
     public void setName(string incoming) 
     {
     
-        // Assign the input to the name field of the object.
         Name = incoming;
         
     }
@@ -41,16 +48,14 @@ public class Ingredient
     public string getName() 
     {
         
-        // Return the name field of the object.
         return Name;
             
     }
     
-    // This method sets the quantity field.
+    // This method sets the quantity field of the recipe.
     public void setQuantity(double incoming) 
     {
     
-        // Assign the input to the name field of the object.
         Quantity = incoming;
         
     }
@@ -59,96 +64,75 @@ public class Ingredient
     public double getQuantity() 
     {
         
-        // Return the name field of the object.
         return Quantity;
             
     }
 
-    // This method sets the measurement field.
+    // This method sets the unit field of the recipe.
     public void setMeasurment(string incoming) 
     {
     
-        // Assign the input to the measurment field of the object.
         unitMeasurment = incoming;
         
     }
 
-    // This method gets the values stored in measurement.
+    // This method gets the values stored in unit.
     public string getMeasurment() 
     {
         
-        // Return the measurment field of the object.
         return unitMeasurment;
             
     }
     
-    public void setFoodGroup() 
+    
+    
+    // This method sets the unit field of the recipe.
+    public void setCalories(int incoming) 
     {
     
-        // Assign the input to the foodgroup field of the object.
-
-        bool flag = false;
-        do
-        {
-
-            Console.WriteLine("Please select a food group:\n1. Starchy foods\n2. Vegetables and fruits\n3. Dry beans, peas, lentils and soya\n4. Chicken, fish, meat and eggs\n5. Milk and dairy products\n6. Fats and oil\n7. Water");
-            string input = Console.ReadLine();
-
-            switch (input)
-            {
-
-                case "1":
-                    foodGroup = "Starchy foods";
-                    flag = true;
-                    break;
-                case "2":
-                    foodGroup = "Vegetables and fruits";
-                    flag = true;
-                    break;
-                case "3":
-                    foodGroup = "Dry beans, peas, lentils and soya";
-                    flag = true;
-                    break;
-                case "4":
-                    foodGroup = "Chicken, fish, meat and eggs";
-                    flag = true;
-                    break;
-                case "5":
-                    foodGroup = "Milk and dairy products";
-                    flag = true;
-                    break;
-                case "6":
-                    foodGroup = "Fats and oil";
-                    flag = true;
-                    break;
-                case "7":
-                    foodGroup = "Water";
-                    flag = true;
-                    break;
-                default:
-                    Console.WriteLine("Incorrect selection/input.\nPLease make use of numbers only");
-                    break;
-                    
-            }
-            
-        } while (flag == false);
-        
+        calories = incoming;
         
     }
 
-    // This method gets the values stored in foodgroup.
-    public string getFoodGroup() 
+    // This method gets the values stored in unit.
+    public int getCalories() 
     {
         
-        // Return the foodgroup field of the object.
+        return calories;
+            
+    }
+    
+   
+    // This method sets the unit field of the recipe.
+    public void setFoodgroup(string incoming) 
+    {
+    
+        foodGroup = incoming;
+        
+    }
+
+    // This method gets the values stored in unit.
+    public string getFoodgroup() 
+    {
+        
         return foodGroup;
             
     }
-   
-    public string toString() 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public static string toString() 
     {
 
-        return "\nIngredient name: " + Name + "\nQuantity: " + Quantity + " " + unitMeasurment;
+        return null;
 
     }
     

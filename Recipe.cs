@@ -1,95 +1,97 @@
 ﻿
 namespace ST10057222_PROG2A_NEFALE;
 
-class Recipe
+class Recipe 
 {
 
     // Declare array variables as fields.
-    private static string Name;
-    private static List<Ingredient> listOfIngredient = new List<Ingredient>();
-    private static IDictionary<int, string> procedures = new Dictionary<int, string>();
-    
+    public string rName;
+    public List<Ingredient> rIngredients;
+    public IDictionary<int, string> rSteps;
+        
     // This is a constructor that takes no arguments.
-    public Recipe()
+    public Recipe() 
     {
-
-
-
+        
+        // There is no code inside this constructor.
+    
     }
 
     // This is a constructor that takes several arguments.
-    public Recipe(string rName, List<Ingredient> rIngredients, IDictionary<int, string> rProcedure)
+    public Recipe(string n, List<Ingredient> i,IDictionary<int, string> s) 
     {
-
+            
         // Assign the input arguments to the corresponding fields of the object.
-        Name = rName;
-        listOfIngredient = rIngredients;
-        procedures = rProcedure;
-
+        rName = n;
+        rIngredients = i;
+        rSteps = s;
 
     }
 
-
-    // This method sets the recipe name.
-    public void setRecipeName(string incoming)
+    
+    
+    
+    
+    // assigns the incoming variable to its corrisponding field
+    public void setName(string incoming)
     {
 
-        // Assign the input string to the recipeName field of the object.
-        Name = incoming;
+        rName = incoming;
 
     }
-
-    // This method gets the recipe name.
-    public string getRecipeName()
-    {
-
-        // Return the Name field of the object.
-        return Name;
-    }
-
-    // This method sets the first array of the recipe.
-    public void setlistOfIngredient(List<Ingredient> incoming)
-    {
-
-        // Assign the input array to the listOfIngredient field of the object.
-        listOfIngredient = incoming;
-
-    }
-
-    // This method gets the first array of the recipe.
-    public List<Ingredient> getlistOfIngredient()
-    {
-
-        // Return the listOfIngredient field of the object.
-        return listOfIngredient;
-
-    }
-
-    // This method sets the second array of the recipe.
-    public void setProcedures(IDictionary<int, string> incoming)
-    {
-
-        // Assign the input array to the procedures field of the object.
-        procedures = incoming;
-
-    }
-
-    // This method gets the second array of the recipe.
-    public IDictionary<int, string> getProcedure()
-    {
-
-        // Return the procedures field of the object.
-        return procedures;
-
-    }
-
-
-    public string toString()
+    
+    //retrieves the data stored in the feild and returns it to where its beiign requested
+    public string getName()
     {
         
-        return "\nRecipe name: " + Name + "\nIngerients:\n" + listOfIngredient.ToString() + "\nSteps:\n" + procedures.ToString();
+        return rName; 
+        
+    }
+    
+    
+    // assigns the incoming variable to its corrisponding field
+    public void setIngredients(List<Ingredient> incoming)
+    {
+
+        rIngredients = incoming;
 
     }
+    
+    //retrieves the data stored in the feild and returns it to where its beiign requested
+    public List<Ingredient>  getIngredients()
+    {
+        
+        return rIngredients; 
+        
+    }
+    
+    
+    // assigns the incoming variable to its corrisponding field
+    public void setSteps(IDictionary<int, string> incoming)
+    {
 
+        rSteps = incoming;
+
+    }
+    
+    //retrieves the data stored in the feild and returns it to where its beiign requested
+    public IDictionary<int, string>  getSteps()
+    {
+        
+        return rSteps; 
+        
+    }
+
+    
+    
+    
+    
+    
+    public static string toString() 
+    {
+
+        return null;
+
+    }
 
 }
